@@ -10,14 +10,18 @@ import {
 import { Loader } from "@/src/shared/ui";
 import { useParams } from "next/navigation";
 
-/* 
-TODO: Make the timeframe selection a separate component and use historyLoading inside
-*/
 export default function CoinPage() {
   const { id } = useParams<{ id: string }>();
 
-  const { coin, history, timeframe, setTimeframe, loading, error } =
-    useCoinDetails(id);
+  const {
+    coin,
+    history,
+    timeframe,
+    historyLoading,
+    setTimeframe,
+    loading,
+    error,
+  } = useCoinDetails(id);
 
   if (loading) return <Loader />;
 
@@ -39,30 +43,12 @@ export default function CoinPage() {
         </div>
 
         <div className="relative">
-          <div className="absolute top-4 right-6 z-10 flex gap-2">
-            {[1, 7, 30, 365].map((days) => (
-              <button
-                key={days}
-                onClick={() => setTimeframe(days as any)}
-                className={`cursor-pointer px-5 py-2 text-sm rounded-lg transition-colors ${
-                  timeframe === days
-                    ? "bg-white text-black"
-                    : "bg-[#2A2A2A] text-[#a0a0a0] hover:bg-[#3A3A3A] hover:text-white"
-                }`}
-              >
-                {days === 1
-                  ? "24H"
-                  : days === 7
-                    ? "7D"
-                    : days === 30
-                      ? "30D"
-                      : "1Y"}
-              </button>
-            ))}
-          </div>
-          {history && (
-            <PriceChart prices={history?.prices} timeframe={timeframe} />
-          )}
+          <PriceChart
+            prices={history?.prices}
+            timeframe={timeframe}
+            isLoading={historyLoading}
+            onChangeTimeframe={setTimeframe}
+          />
         </div>
 
         <div className="px-6 py-6 border-t border-[#2A2A2A]">

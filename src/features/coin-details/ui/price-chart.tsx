@@ -1,169 +1,51 @@
 "use client";
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-  Chart,
-  ChartOptions,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-);
+import { LineChart, Loader } from "@/src/shared/ui";
 
 type Props = {
-  prices: number[][];
+  prices?: number[][];
   timeframe: number;
+  isLoading?: boolean;
+  onChangeTimeframe: (days: 1 | 7 | 30 | 365) => void;
 };
 
-export function PriceChart({ prices, timeframe }: Props) {
-  const chartData = {
-    labels: prices.map(([timestamp]) => {
-      const date = new Date(timestamp);
-      if (timeframe === 1) {
-        return date.toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        });
-      }
-      return date.toLocaleDateString([], { month: "short", day: "numeric" });
-    }),
-    datasets: [
-      {
-        label: "Price",
-        data: prices.map(([, price]) => price),
-        borderColor: "#FFFFFF",
-        backgroundColor: "transparent",
-        fill: false,
-        tension: 0.3,
-        pointRadius: 0,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: "#FFFFFF",
-        pointHoverBorderColor: "#FFFFFF",
-        pointHoverBorderWidth: 2,
-        borderWidth: 2,
-      },
-    ],
-  };
-
-  const dotBackgroundPlugin = {
-    id: "dotBackground",
-    beforeDraw: (chart: Chart) => {
-      const { ctx, chartArea } = chart;
-      const { top, bottom, left, right } = chartArea;
-
-      ctx.save();
-
-      const dotSize = 1.5;
-      const spacing = 20;
-
-      for (let y = top - (top % spacing); y <= bottom; y += spacing) {
-        for (let x = left - (left % spacing); x <= right; x += spacing) {
-          ctx.beginPath();
-          ctx.fillStyle = "#1f1f1f";
-          ctx.arc(x, y, dotSize, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-
-      ctx.restore();
-    },
-  };
-
-  const options: ChartOptions<"line"> = {
-    responsive: true,
-    maintainAspectRatio: false,
-    interaction: {
-      mode: "index" as const,
-      intersect: false,
-    },
-    plugins: {
-      tooltip: {
-        backgroundColor: "#2A2A2A",
-        titleColor: "#FFFFFF",
-        bodyColor: "#FFFFFF",
-        borderColor: "#FFFFFF",
-        borderWidth: 1,
-        padding: 10,
-        cornerRadius: 8,
-        displayColors: false,
-        callbacks: {
-          label: (context: any) => {
-            return `$${context.parsed.y.toLocaleString(undefined, {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}`;
-          },
-        },
-      },
-      legend: {
-        display: false,
-      },
-    },
-    scales: {
-      y: {
-        display: false,
-        grid: {
-          display: false,
-        },
-        border: {
-          display: false,
-        },
-        ticks: {
-          display: false,
-        },
-      },
-      x: {
-        display: false,
-        grid: {
-          display: false,
-        },
-        border: {
-          display: false,
-        },
-        ticks: {
-          display: false,
-        },
-      },
-    },
-    elements: {
-      line: {
-        borderJoinStyle: "round",
-        borderCapStyle: "round",
-      },
-    },
-    layout: {
-      padding: {
-        top: 20,
-        bottom: 20,
-        left: 0,
-        right: 0,
-      },
-    },
-  };
-
+export function PriceChart({
+  prices,
+  timeframe,
+  isLoading,
+  onChangeTimeframe,
+}: Props) {
   return (
-    <div className="w-full h-[450px] relative">
-      <Line
-        data={chartData}
-        options={options}
-        plugins={[dotBackgroundPlugin]}
-      />
+    <div className="relative h-[450px]">
+      <div className="absolute top-4 right-6 z-10 flex gap-2">
+        {[1, 7, 30, 365].map((days) => (
+          <button
+            key={days}
+            onClick={() => onChangeTimeframe(days as any)}
+            className={`cursor-pointer px-5 py-2 text-sm rounded-lg transition-colors ${
+              timeframe === days
+                ? "bg-white text-black"
+                : "bg-[#2A2A2A] text-[#a0a0a0] hover:bg-[#3A3A3A] hover:text-white"
+            }`}
+          >
+            {days === 1
+              ? "24H"
+              : days === 7
+                ? "7D"
+                : days === 30
+                  ? "30D"
+                  : "1Y"}
+          </button>
+        ))}
+      </div>
+
+      {isLoading ? (
+        <div className="h-full flex items-center justify-center">
+          <Loader />
+        </div>
+      ) : prices ? (
+        <LineChart key={timeframe} data={prices} timeframe={timeframe} />
+      ) : null}
     </div>
   );
 }
