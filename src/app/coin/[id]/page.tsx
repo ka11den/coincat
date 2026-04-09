@@ -37,7 +37,7 @@ export default function CoinPage() {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-8">
-      <div className="bg-[#1A1A1A] rounded-xl border border-[#2A2A2A] overflow-hidden">
+      <div className="bg-surface rounded-xl border border-border overflow-hidden">
         <div className="p-6 pb-0">
           <CoinHeader coin={coin} />
         </div>
@@ -51,11 +51,11 @@ export default function CoinPage() {
           />
         </div>
 
-        <div className="px-6 py-6 border-t border-[#2A2A2A]">
+        <div className="px-6 py-6 border-t border-border">
           <StatsGrid coin={coin} />
         </div>
 
-        <div className="px-6 py-6 border-t border-[#2A2A2A]">
+        <div className="px-6 py-6 border-t border-border">
           <MarketData coin={coin} />
         </div>
       </div>

@@ -14,6 +14,7 @@ import {
   ChartOptions,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { useMemo } from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -32,6 +33,23 @@ type Props = {
 };
 
 export function LineChart({ data, timeframe }: Props) {
+  const getCssVar = (name: string) => {
+    if (typeof window === "undefined") return "";
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue(name)
+      .trim();
+  };
+
+  const themeColors = useMemo(() => {
+    return {
+      line: getCssVar("--chart-line"),
+      point: getCssVar("--chart-point"),
+      tooltipBg: getCssVar("--chart-tooltip-bg"),
+      tooltipText: getCssVar("--chart-tooltip-text"),
+      gridDot: getCssVar("--chart-grid-dot"),
+    };
+  }, []);
+
   const chartData = {
     labels: data.map(([timestamp]) => {
       const date = new Date(timestamp);
@@ -41,20 +59,23 @@ export function LineChart({ data, timeframe }: Props) {
           minute: "2-digit",
         });
       }
-      return date.toLocaleDateString([], { month: "short", day: "numeric" });
+      return date.toLocaleDateString([], {
+        month: "short",
+        day: "numeric",
+      });
     }),
     datasets: [
       {
         label: "Price",
         data: data.map(([, price]) => price),
-        borderColor: "#FFFFFF",
+        borderColor: themeColors.line,
         backgroundColor: "transparent",
         fill: false,
         tension: 0.3,
         pointRadius: 0,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: "#FFFFFF",
-        pointHoverBorderColor: "#FFFFFF",
+        pointHoverBackgroundColor: themeColors.point,
+        pointHoverBorderColor: themeColors.point,
         pointHoverBorderWidth: 2,
         borderWidth: 2,
       },
@@ -65,6 +86,8 @@ export function LineChart({ data, timeframe }: Props) {
     id: "dotBackground",
     beforeDraw: (chart: Chart) => {
       const { ctx, chartArea } = chart;
+      if (!chartArea) return;
+
       const { top, bottom, left, right } = chartArea;
 
       ctx.save();
@@ -75,7 +98,7 @@ export function LineChart({ data, timeframe }: Props) {
       for (let y = top - (top % spacing); y <= bottom; y += spacing) {
         for (let x = left - (left % spacing); x <= right; x += spacing) {
           ctx.beginPath();
-          ctx.fillStyle = "#1f1f1f";
+          ctx.fillStyle = themeColors.gridDot;
           ctx.arc(x, y, dotSize, 0, Math.PI * 2);
           ctx.fill();
         }
@@ -89,15 +112,15 @@ export function LineChart({ data, timeframe }: Props) {
     responsive: true,
     maintainAspectRatio: false,
     interaction: {
-      mode: "index" as const,
+      mode: "index",
       intersect: false,
     },
     plugins: {
       tooltip: {
-        backgroundColor: "#2A2A2A",
-        titleColor: "#FFFFFF",
-        bodyColor: "#FFFFFF",
-        borderColor: "#FFFFFF",
+        backgroundColor: themeColors.tooltipBg,
+        titleColor: themeColors.tooltipText,
+        bodyColor: themeColors.tooltipText,
+        borderColor: themeColors.line,
         borderWidth: 1,
         padding: 10,
         cornerRadius: 8,
@@ -118,27 +141,15 @@ export function LineChart({ data, timeframe }: Props) {
     scales: {
       y: {
         display: false,
-        grid: {
-          display: false,
-        },
-        border: {
-          display: false,
-        },
-        ticks: {
-          display: false,
-        },
+        grid: { display: false },
+        border: { display: false },
+        ticks: { display: false },
       },
       x: {
         display: false,
-        grid: {
-          display: false,
-        },
-        border: {
-          display: false,
-        },
-        ticks: {
-          display: false,
-        },
+        grid: { display: false },
+        border: { display: false },
+        ticks: { display: false },
       },
     },
     elements: {
@@ -151,13 +162,16 @@ export function LineChart({ data, timeframe }: Props) {
       padding: {
         top: 20,
         bottom: 20,
-        left: 0,
-        right: 0,
       },
     },
   };
 
   return (
-    <Line data={chartData} plugins={[dotBackgroundPlugin]} options={options} />
+    <Line
+      key={themeColors.line}
+      data={chartData}
+      plugins={[dotBackgroundPlugin]}
+      options={options}
+    />
   );
 }

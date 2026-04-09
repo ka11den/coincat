@@ -34,12 +34,12 @@ export function CryptoRow({ crypto }: Props) {
   const getChangeColor = (change: number) => {
     if (change > 0) return "text-green-300";
     if (change < 0) return "text-red-300";
-    return "text-[#a0a0a0]";
+    return "text-text-secondary";
   };
 
   return (
-    <tr className="border-b border-[#2A2A2A] hover:bg-[#252525] transition-colors duration-150">
-      <td className="px-4 py-4 text-sm text-[#a0a0a0]">
+    <tr className="border-b border-border hover:bg-background transition-colors duration-150">
+      <td className="px-4 py-4 text-sm text-text-secondary">
         {crypto.market_cap_rank}
       </td>
       <td className="px-4 py-4">
@@ -54,16 +54,16 @@ export function CryptoRow({ crypto }: Props) {
             />
           </div>
           <div>
-            <div className="font-semibold text-white transition-colors">
+            <div className="font-semibold text-primary transition-colors">
               {crypto.name}
             </div>
-            <div className="text-xs text-[#a0a0a0] uppercase">
+            <div className="text-xs text-text-secondary uppercase">
               {crypto.symbol}
             </div>
           </div>
         </Link>
       </td>
-      <td className="px-4 py-4 text-sm font-medium text-right text-white">
+      <td className="px-4 py-4 text-sm font-medium text-right text-primary">
         {formatPrice(crypto.current_price)}
       </td>
       <td
@@ -72,10 +72,10 @@ export function CryptoRow({ crypto }: Props) {
         {crypto.price_change_percentage_24h > 0 ? "+" : ""}
         {crypto.price_change_percentage_24h?.toFixed(2)}%
       </td>
-      <td className="px-4 py-4 text-sm text-right text-[#a0a0a0]">
+      <td className="px-4 py-4 text-sm text-right text-text-secondary">
         {formatMarketCap(crypto.market_cap)}
       </td>
-      <td className="px-4 py-4 text-sm text-right text-[#a0a0a0]">
+      <td className="px-4 py-4 text-sm text-right text-text-secondary">
         {formatVolume(crypto.total_volume)}
       </td>
     </tr>

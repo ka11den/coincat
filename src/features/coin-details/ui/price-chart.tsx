@@ -24,8 +24,8 @@ export function PriceChart({
             onClick={() => onChangeTimeframe(days as any)}
             className={`cursor-pointer px-5 py-2 text-sm rounded-lg transition-colors ${
               timeframe === days
-                ? "bg-white text-black"
-                : "bg-[#2A2A2A] text-[#a0a0a0] hover:bg-[#3A3A3A] hover:text-white"
+                ? "bg-white text-accent-foreground"
+                : "bg-hover text-text-secondary hover:bg-surface-secondary"
             }`}
           >
             {days === 1

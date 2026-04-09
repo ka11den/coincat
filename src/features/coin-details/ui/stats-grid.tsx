@@ -45,19 +45,23 @@ export function StatsGrid({ coin }: Props) {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold text-white mb-4">
+      <h2 className="text-lg font-semibold text-primary mb-4">
         Market Statistics
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-[#0F0F0F] rounded-lg p-4 border border-[#2A2A2A]"
+            className="bg-surface rounded-lg p-4 border border-border"
           >
-            <div className="text-sm text-[#a0a0a0] mb-1">{stat.label}</div>
-            <div className="text-xl font-semibold text-white">{stat.value}</div>
+            <div className="text-sm text-text-secondary mb-1">{stat.label}</div>
+            <div className="text-xl font-semibold text-primary">
+              {stat.value}
+            </div>
             {stat.date && (
-              <div className="text-xs text-[#a0a0a0] mt-1">{stat.date}</div>
+              <div className="text-xs text-text-secondary mt-1">
+                {stat.date}
+              </div>
             )}
           </div>
         ))}

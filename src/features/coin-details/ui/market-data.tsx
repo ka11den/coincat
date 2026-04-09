@@ -15,7 +15,7 @@ export function MarketData({ coin }: Props) {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-white mb-4">
+        <h3 className="text-lg font-semibold text-primary mb-4">
           Price Change Statistics
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -24,9 +24,9 @@ export function MarketData({ coin }: Props) {
             return (
               <div
                 key={index}
-                className="bg-[#0F0F0F] rounded-lg p-3 text-center border border-[#2A2A2A]"
+                className="bg-surface rounded-lg p-3 text-center border border-border"
               >
-                <div className="text-xs text-[#a0a0a0] mb-1">
+                <div className="text-xs text-text-secondary mb-1">
                   {change.label}
                 </div>
                 <div
@@ -43,11 +43,11 @@ export function MarketData({ coin }: Props) {
 
       {coin.description.en && (
         <div>
-          <h3 className="text-lg font-semibold text-white mb-4">
+          <h3 className="text-lg font-semibold text-primary mb-4">
             About {coin.name}
           </h3>
           <div
-            className="text-sm text-[#a0a0a0] leading-relaxed prose prose-invert max-w-none"
+            className="text-sm text-text-secondary leading-relaxed prose prose-invert max-w-none"
             dangerouslySetInnerHTML={{
               __html: coin.description.en,
             }}

@@ -36,15 +36,13 @@ export function CoinHeader({ coin }: Props) {
       <div className="flex items-center gap-4">
         <div className="grid gap-3">
           <div className="flex items-center gap-2">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              {coin.name}
-            </h1>
+            <h1 className="text-3xl font-bold text-primary">{coin.name}</h1>
             <span className="text-lg text-gray-500 dark:text-gray-400 uppercase">
               {coin.symbol}
             </span>
           </div>
           <div className="flex items-baseline gap-2 mt-2">
-            <span className="text-3xl md:text-6xl font-bold text-gray-900 dark:text-white">
+            <span className="text-3xl md:text-6xl font-bold text-primary">
               {formatPrice(currentPrice)}
             </span>
             <span className="text-xl md:text-4xl font-bold text-gray-500 dark:text-gray-400">

@@ -27,11 +27,7 @@ export const CryptoSearchResult = ({ result, onClose, isSelected }: Props) => {
     <Link
       href={result.url}
       onClick={handleClick}
-      className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
-        isSelected
-          ? "bg-blue-50 dark:bg-blue-900/20"
-          : "hover:bg-gray-100 dark:hover:bg-[#1A1A1A]"
-      }`}
+      className="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors hover:bg-hover"
     >
       {result.image && (
         <div className="relative w-8 h-8">
@@ -46,16 +42,18 @@ export const CryptoSearchResult = ({ result, onClose, isSelected }: Props) => {
       )}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-[#a0a0a0] truncate">
+          <span className="text-sm font-medium text-text-secondary truncate">
             {result.title}
           </span>
           {result.subtitle && (
-            <span className="text-xs text-[#a0a0a0]">{result.subtitle}</span>
+            <span className="text-xs text-text-secondary">
+              {result.subtitle}
+            </span>
           )}
         </div>
         {result.metadata?.price !== undefined && (
           <div className="flex items-center gap-2 mt-0.5">
-            <span className="text-xs text-white">
+            <span className="text-xs text-primary">
               ${result.metadata.price.toLocaleString()}
             </span>
             {result.metadata.change !== undefined && (

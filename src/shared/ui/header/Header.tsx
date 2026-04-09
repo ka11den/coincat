@@ -3,6 +3,7 @@
 import { SearchModal } from "@/src/features/search";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { ThemeToggle } from "@/src/features/theme-toggle";
 
 export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
@@ -28,7 +29,7 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-[#1F1F1F] backdrop-blur-3xl">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-border backdrop-blur-3xl">
         <nav className="px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="group flex items-center gap-3 shrink-0">
@@ -83,7 +84,7 @@ export function Header() {
                 <li>
                   <Link
                     href="/"
-                    className="text-sm font-medium text-[#a0a0a0] hover:text-white transition-colors duration-200"
+                    className="text-sm font-medium text-text-secondary hover:text-active transition-colors duration-200"
                   >
                     Cryptocurrencies
                   </Link>
@@ -94,7 +95,7 @@ export function Header() {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="hidden cursor-pointer md:flex items-center gap-3 px-4 py-2 text-sm text-[#a0a0a0] bg-gray-100 dark:bg-[#1A1A1A] rounded-lg hover:bg-gray-200 dark:hover:bg-[#252525] transition-colors duration-200 border border-gray-200 dark:border-[#2A2A2A] min-w-[260px] group"
+                className="hidden cursor-pointer md:flex items-center gap-3 px-4 py-2 text-sm text-text-secondary bg-surface rounded-lg hover:bg-hover transition-colors duration-200 border border-border min-w-[260px] group"
               >
                 <svg
                   className="w-4 h-4 group-hover:text-gray-700 dark:group-hover:text-gray-300"
@@ -110,14 +111,14 @@ export function Header() {
                   />
                 </svg>
                 <span className="flex-1 text-left">Search...</span>
-                <kbd className="hidden sm:inline-block px-2 py-0.5 text-xs font-mono text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-[#252525] rounded border border-gray-300 dark:border-[#3A3A3A]">
+                <kbd className="hidden sm:inline-block px-2 py-0.5 text-xs font-mono text-text-secondary bg-background rounded border border-border">
                   ⌘ K
                 </kbd>
               </button>
 
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="md:hidden p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                className="md:hidden p-2 text-text-secondary hover:text-white transition-colors"
               >
                 <svg
                   className="w-5 h-5"
@@ -133,6 +134,7 @@ export function Header() {
                   />
                 </svg>
               </button>
+              <ThemeToggle />
             </div>
           </div>
         </nav>

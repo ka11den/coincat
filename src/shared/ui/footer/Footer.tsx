@@ -23,7 +23,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative mt-auto border-t border-[#2A2A2A] bg-[#101010]">
+    <footer className="relative mt-auto border-t border-border bg-surface">
       <div className="relative max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
@@ -58,10 +58,10 @@ export function Footer() {
                 />
               </svg>
               <div>
-                <h2 className="text-xl font-bold tracking-tight text-white">
+                <h2 className="text-xl font-bold tracking-tight text-primary">
                   CoinCat
                 </h2>
-                <p className="text-[10px] text-[#a0a0a0] -mt-0.5">
+                <p className="text-[10px] text-text-secondary -mt-0.5">
                   crypto explorer
                 </p>
               </div>
@@ -70,7 +70,7 @@ export function Footer() {
 
           {Object.values(navigation).map((section) => (
             <div key={section.title}>
-              <h3 className="text-sm font-semibold text-white mb-4">
+              <h3 className="text-sm font-semibold text-primary mb-4">
                 {section.title}
               </h3>
               <ul className="space-y-2">
@@ -78,7 +78,7 @@ export function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-sm text-[#a0a0a0] hover:text-white transition-colors duration-200"
+                      className="text-sm text-text-secondary hover:text-active transition-colors duration-200"
                     >
                       {link.name}
                     </Link>
@@ -89,17 +89,17 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="relative my-8 w-full border-t border-[#2A2A2A]"></div>
+        <div className="relative my-8 w-full border-t border-border"></div>
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="text-sm text-[#a0a0a0]">CoinCat. Pet project.</div>
+          <div className="text-sm text-primary">CoinCat. Pet project.</div>
 
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 text-xs text-[#a0a0a0]">
+            <div className="flex items-center gap-2 text-xs text-text-secondary">
               <span className="inline-block w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
               <span>Live Data</span>
             </div>
-            <div className="flex items-center gap-2 text-xs text-[#a0a0a0]">
+            <div className="flex items-center gap-2 text-xs text-text-secondary">
               <svg
                 className="w-3 h-3"
                 fill="none"

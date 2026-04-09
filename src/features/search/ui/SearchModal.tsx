@@ -65,8 +65,8 @@ export const SearchModal = ({ isOpen, onClose }: Props) => {
           ref={modalRef}
           className="w-full max-w-2xl animate-in slide-in-from-top-4 duration-300"
         >
-          <div className="bg-[#0F0F0F] rounded-xl shadow-2xl border border-[#2A2A2A] overflow-hidden">
-            <div className="flex items-center border-b border-[#2A2A2A] p-4">
+          <div className="bg-surface rounded-xl shadow-2xl border border-border overflow-hidden">
+            <div className="flex items-center border-b border-border p-4">
               <svg
                 className="w-5 h-5 text-gray-400 mr-3"
                 fill="none"
@@ -86,14 +86,14 @@ export const SearchModal = ({ isOpen, onClose }: Props) => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search cryptocurrencies, articles..."
-                className="flex-1 bg-transparent outline-none text-[#a0a0a0] placeholder-[#a0a0a0] text-lg"
+                className="flex-1 bg-transparent outline-none text-text-secondary placeholder-text-text-secondary text-lg"
               />
               <button
                 onClick={() => {
                   onClose();
                   setQuery("");
                 }}
-                className="text-[#a0a0a0] hover:text-gray-300 transition-colors"
+                className="text-text-secondary hover:hover transition-colors"
               >
                 <svg
                   className="w-5 h-5"
@@ -120,15 +120,15 @@ export const SearchModal = ({ isOpen, onClose }: Props) => {
               />
             </div>
 
-            <div className="flex items-center justify-between px-4 py-3 bg-gray-50 dark:bg-[#0A0A0A] border-t border-gray-200 dark:border-[#2A2A2A] text-xs text-[#a0a0a0]">
+            <div className="flex items-center justify-between px-4 py-3 bg-surface border-t border-border text-xs text-text-secondary">
               <div className="flex items-center gap-3">
-                <kbd className="px-2 py-0.5 text-xs font-mono bg-[#1A1A1A] rounded border border-[#3A3A3A]">
+                <kbd className="px-2 py-0.5 text-xs font-mono bg-background rounded border border-border">
                   ⌘ K
                 </kbd>
                 <span>to search</span>
               </div>
               <div>
-                <kbd className="px-2 py-0.5 text-xs font-mono bg-gray-200 dark:bg-[#1A1A1A] rounded border border-gray-300 dark:border-[#3A3A3A]">
+                <kbd className="px-2 py-0.5 text-xs font-mono bg-background rounded border border-border">
                   ESC
                 </kbd>
                 <span className="ml-1">to close</span>
@@ -137,32 +137,6 @@ export const SearchModal = ({ isOpen, onClose }: Props) => {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .custom-scrollbar {
-          scrollbar-width: thin;
-          scrollbar-color: #4a4a4a #0f0f0f;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: #0f0f0f;
-          border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #0f0f0f;
-          border-radius: 10px;
-          transition: background 0.2s;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #0f0f0f;
-        }
-      `}</style>
     </>
   );
 };
