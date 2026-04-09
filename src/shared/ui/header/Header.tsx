@@ -118,7 +118,7 @@ export function Header() {
 
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="md:hidden p-2 text-text-secondary hover:text-white transition-colors"
+                className="md:hidden cursor-pointer rounded-lg border border-border bg-surface hover:bg-hover duration-200 flex items-center justify-center p-2 text-text-secondary hover:text-white transition-all"
               >
                 <svg
                   className="w-5 h-5"

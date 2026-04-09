@@ -23,7 +23,7 @@ export function ThemeToggle() {
     >
       {isDark ? (
         <svg
-          className="w-5 h-5 text-text-primary transition-transform duration-300 rotate-0 scale-100"
+          className="w-5 h-5 text-text-secondary transition-transform duration-300 rotate-0 scale-100"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -37,7 +37,7 @@ export function ThemeToggle() {
         </svg>
       ) : (
         <svg
-          className="w-5 h-5 text-text-primary transition-transform duration-300 rotate-0 scale-100"
+          className="w-5 h-5 text-text-secondary transition-transform duration-300 rotate-0 scale-100"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
